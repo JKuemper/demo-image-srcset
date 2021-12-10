@@ -4,8 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Images</title>
+    <!-- STEP 1. Make sure all images are flexible and fit in any sized container -->
+    <style>
+        img{
+            max-width: 100%;
+            display: block;
+        }
+    </style>
 </head>
 <body>
+    <!-- STEP 2. Get the browser to fetch a version of an image with the smallest dimension that is still bigger than the final display size. 
+                Add srset to the image tag. -->
+    <!-- <img srcset="img/eggs-600.jpg,
+                 img/eggs-900.jpg"
+        src="img/eggs-900.jpg" alt="easter eggs"/> -->
+        <!-- Src: fallback image -->
+        <!-- Notice that it loads the first image only (eggs-600) because the browser has no way of determining the file size before it loads, so it takes the first image -->
 
+    <!-- STEP 3. Add in Width Descriptors (defines the width of each image based on viewport width by putting actual image width. Ex. 600w)-->
+    <!-- <img srcset="img/eggs-600.jpg 600w,
+                 img/eggs-900.jpg 900w"
+        src="img/eggs-900.jpg" alt="easter eggs"/> -->
+        <!-- Note: Open the browser to the smallest window size to see the smaller image. Might have to do a hard refresh if the larger image is cached. -->
+        <!-- The width descriptor tells the browser the width of each image in px, and then the browser can decide which image to load which will load the image with the smallest width that is still larger than the viewport width. -->
+        <!-- Ex. will open eggs-600 if the starting viewport of the screen is less than 600px, will open eggs-900 if viewport is larger than 600px -->
+
+    <!-- STEP 4. Use the sizes attribute along side the srcset attribute -->
+    <!-- <img srcset="img/eggs-600.jpg 600w,
+                 img/eggs-900.jpg 900w"
+        sizes="50vw"
+        src="img/eggs-900.jpg" alt="easter eggs"/> -->
+        <!-- The Sizes attribute matches the image's max-width value. 50vw = 50% of the full viewport width -->
+        <!-- Note: measurements for Sizes attributes can only be px, ems/rems, or vw - never % -->
+        <!-- Now the browser has all the info it needs to choose the correct image version -->
+
+
+    <!-- STEP 5. Using media queries -->
+    <img srcset="img/eggs-600.jpg 600w,
+                 img/eggs-900.jpg 900w"
+        sizes="(max-width: 600px) 600px, 900px"
+        src="img/eggs-900.jpg" alt="easter eggs"/>
+        <!-- We can use Media in the Sizes attribute to fetch and load the image to a sized parameter based on the viewport width -->
+        <!-- We can even change the size of the image to a hard pixel values if needed. -->
 </body>
 </html>
